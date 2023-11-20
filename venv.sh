@@ -7,14 +7,10 @@ venv_name="venv"
 venv_path=$(realpath "$venv_name")
 
 # Comando para criar o ambiente virtual
-python -m venv "$venv_path"
+python3 -m venv "$venv_path"
 
 # Comando para ativar o ambiente virtual
-if [ "$(uname)" == "Darwin" ]; then
-    activate_venv="$venv_path/bin/activate"
-else
-    activate_venv="$venv_path/bin/activate"
-fi
+activate_venv="$venv_path/bin/activate"
 
 # Ativa automaticamente o ambiente virtual
 source "$activate_venv"
