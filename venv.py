@@ -1,29 +1,20 @@
-import os
-import subprocess
-import platform
+iimport subprocess
 
-# Solicita ao usuário inserir um nome para o ambiente virtual
-venv_name = input("Digite um nome para o ambiente virtual (ou deixe vazio para padrão 'venv'): ").strip()
-
-# Define um nome padrão se nenhum for fornecido
-if not venv_name:
-    venv_name = "venv"
+# Nome fixo para o ambiente virtual
+venv_name = "venv"
 
 # Caminho para o diretório onde o ambiente virtual será criado
-venv_path = os.path.join(os.getcwd(), venv_name)
+venv_path = subprocess.check_output(["realpath", venv_name], text=True).strip()
 
 # Comando para criar o ambiente virtual
-criar_venv = f"python -m venv {venv_path}"
-
-# Executa o comando para criar o ambiente virtual
-subprocess.run(criar_venv, shell=True)
+subprocess.run(["python", "-m", "venv", venv_path])
 
 # Comando para ativar o ambiente virtual
-if platform.system() == "Windows":
-    ativar_venv = os.path.join(venv_path, "Scripts", "activate")
+if platform.system() == "Darwin":
+    activate_venv = f"{venv_path}/bin/activate"
 else:
-    ativar_venv = os.path.join(venv_path, "bin", "activate")
+    activate_venv = f"{venv_path}/bin/activate"
 
 # Exibe instruções para ativar manualmente
 print(f"O ambiente virtual foi criado em {venv_path}.")
-print(f"Para ativar o ambiente virtual, execute: source {ativar_venv}")
+print(f"Para ativar o ambiente virtual, execute: source {activate_venv}")
