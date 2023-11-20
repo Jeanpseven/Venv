@@ -11,11 +11,13 @@ python -m venv "$venv_path"
 
 # Comando para ativar o ambiente virtual
 if [ "$(uname)" == "Darwin" ]; then
-    ativar_venv="$venv_path/bin/activate"
+    activate_venv="$venv_path/bin/activate"
 else
-    ativar_venv="$venv_path/bin/activate"
+    activate_venv="$venv_path/bin/activate"
 fi
 
-# Exibe instruções para ativar manualmente
-echo "O ambiente virtual foi criado em $venv_path."
-echo "Para ativar o ambiente virtual, execute: source $ativar_venv"
+# Ativa automaticamente o ambiente virtual
+source "$activate_venv"
+
+# Exibe instruções
+echo "O ambiente virtual foi criado e ativado em $venv_path."
